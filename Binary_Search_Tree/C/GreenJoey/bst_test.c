@@ -8,4 +8,7 @@ int main(){
     if(bst_init(&tree, &tmp_data, sizeof(tmp_data)) == -1)
         printf("Memory can't be allocated");
     printf("%d\n", *(int *)tree->data);
+    bst_free(&tree);
+    if(tree != NULL)
+        printf("Memory deallocation failed");
 }
