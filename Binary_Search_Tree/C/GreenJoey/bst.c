@@ -56,3 +56,22 @@ int bst_insert(bst_t **tree, void *data, size_t size,  bool (*compare)(void *, v
         bst_insert(&(*tree)->right, data, size, compare);
     return 0;
 }
+
+
+bst_t *bst_search(bst_t *tree, void *data, int (*compare)(void *, void *)){
+    
+    /**
+     * Returns the address of the node asked to find 
+     * :param: tree is the pointer to the tree
+     * :param: the data asked to find
+     * :param: compare call-back to compare the equality of the current node's data and the passed data
+     * :returns: Returns the node's address or NULL
+     **/
+    if(compare(tree->data, data) == 0)
+        return tree;
+    if(compare(tree->data, data) == 1)
+        return bst_search(tree->left, data, compare);
+    if(compare(tree->data, data) == -1)
+        return bst_search(tree->right, data, compare);
+    return NULL;
+}
