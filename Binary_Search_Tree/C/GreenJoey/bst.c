@@ -29,12 +29,30 @@ int bst_init(bst_t **root, void *data, size_t data_size){
 void bst_free(bst_t **tree){
     if((*tree)->right)
         bst_free(&(*tree)->right);
+    
     if((*tree)->left)
         bst_free(&(*tree)->left);
-    else{
-        if((*tree)->data)
-            free((*tree)->data);
-        free(*tree);
-        *tree = NULL;
-    }
+    
+    if((*tree)->data)
+        free((*tree)->data);
+    free(*tree);
+    *tree = NULL;
+}
+
+
+int bst_insert(bst_t **tree, void *data, size_t size,  bool (*compare)(void *, void *)){
+    /**
+     * :param: tree is the pointer to the bst
+     * :param: data is the pointer to the data for the new node
+     * :param: size is the size of the data
+     * :param: The compare call-back is used to decide if data is greater than current node's data
+     **/
+    if(*tree == NULL)
+        return bst_init(tree, data, size);
+    bool is_greater = compare(data, (*tree)->data);
+    if(is_greater)
+        bst_insert(&(*tree)->left, data, size, compare);
+    else
+        bst_insert(&(*tree)->right, data, size, compare);
+    return 0;
 }
