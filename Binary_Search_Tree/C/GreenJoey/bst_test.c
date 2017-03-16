@@ -6,6 +6,17 @@ bool compare(void *num1, void *num2){
     return *(int *)num1 > *(int *)num2 ? true: false;
 }
 
+int equal(void *n1, void *n2){
+    int num1 = *(int *)n1;
+    int num2 = *(int *)n2;
+    
+    if(num1 > num2)
+        return 1;
+    elif(num1 < num2)
+        return -1;
+    return 0;
+}
+
 int main(){
     bst_t *tree;
     int tmp_data;

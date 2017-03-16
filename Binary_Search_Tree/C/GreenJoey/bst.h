@@ -4,6 +4,7 @@
 
 #define and &&
 #define or ||
+#define elif else if
 
 typedef enum bool{
     false, true
